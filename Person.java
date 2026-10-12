@@ -1,6 +1,6 @@
 public abstract class Person implements IPerson {
 
-protected int id ; 
+protected final int id ; 
 protected String name ; 
 protected String phoneNumber ; 
 protected LinkedList <IRide> rideHistory ; 
