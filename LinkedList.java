@@ -85,4 +85,26 @@ temp = temp.next ;
 
 System.out.println(size) ;
 }
+
+public void insertBeforeCurrent(T val){
+Node<T> newNode = new Node<T> () ;
+if (size == 0)
+head = current = newNode ; 
+else if( current == head){
+newNode.next = head ; 
+head = newNode ; 
+}
+else{
+Node<T> temp = head ; 
+
+while ( temp.next!= current)
+temp = temp.next ;
+
+newNode.next = current ; 
+temp.next = newNode ; 
+}
+size++ ; 
+}
+
+
 }
