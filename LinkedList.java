@@ -38,7 +38,7 @@ current.data = d ;
 public void insert(T d){
 Node<T> newNode = new Node<T> (d) ; 
 
-if (head == null){
+if (empty()){
 head = newNode ; 
 current = newNode ; 
 }
@@ -48,6 +48,7 @@ current.next = newNode ;
 
 current = newNode ; 
 }
+size++ ; 
 }
 
 public void remove(){
@@ -59,13 +60,14 @@ else{
 Node<T> temp = head ; 
 while (temp.next!= current)
 temp = temp.next ; 
-
 temp.next = current.next ; 
+}
 if (current.next!=null)
 current = current.next  ; 
 else
 current = head ; 
-}
+
+size -- ;
 }
 
 public int size(){
