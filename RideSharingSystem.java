@@ -17,7 +17,28 @@ public RideSharingSystem() {
   public boolean addRider(IRider rider) {
     return riderList.add(rider);
   }
-
+@override
+  loadRidersFromCSV(String filePath) {
+    try{ 
+      Scanner read = new Scanner(new File(filePath));
+      while (read.hasNextLine()) {
+        String [] d = read.nextLine().trim().split(",");
+        IRider r = new Rider(
+          Integer.parseInt(d[0]), //riderId
+          d[1], //name
+          d[3], //phone
+          d[2], //email
+          d[4] //homeCity
+          );
+        addRider(r);
+      }
+      read.close();
+      return true;
+    } catch (Exception e) {
+      return false;
+    }
+  }
+      
   
   
 }
