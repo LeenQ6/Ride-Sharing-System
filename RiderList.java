@@ -178,8 +178,6 @@ if (currentRider.getName().equals(fullName) ){
 riders.remove() ; 
 count++ ; }
 
-else if(riders.last())
-break ; 
 
 else
 riders.findnext() ; 
