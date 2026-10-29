@@ -45,7 +45,6 @@ current = newNode ;
 else{
 newNode.next = current.next ; 
 current.next = newNode ;
-
 current = newNode ; 
 }
 size++ ; 
@@ -54,7 +53,6 @@ size++ ;
 public void remove(){
 if (current == head){
 head = head.next ; 
-current = current.next ; 
 }
 else{
 Node<T> temp = head ; 
@@ -81,16 +79,16 @@ return ;
 Node<T> temp = head ; 
 
 while ( temp!= null){
-System.out.println(temp.data) ; 
+System.out.println(temp.data+" ") ; 
 temp = temp.next ; 
 }
 
-System.out.println(size) ;
+System.out.println("Number of items: "+size) ;
 }
 
-public void insertBeforeCurrent(T val){
-Node<T> newNode = new Node<T> () ;
-if (size == 0)
+public void insertBeforeCurrent(T d){
+Node<T> newNode = new Node<T> (d) ;
+if (head == null)
 head = current = newNode ; 
 else if( current == head){
 newNode.next = head ; 
@@ -98,7 +96,6 @@ head = newNode ;
 }
 else{
 Node<T> temp = head ; 
-
 while ( temp.next!= current)
 temp = temp.next ;
 
