@@ -1,0 +1,233 @@
+
+
+import java.util.Scanner;
+
+public class Main {
+
+	private static void printMenu() {
+		System.out.println("\n===== Ride-Sharing System Menu =====");
+		System.out.println("1. List all riders.");
+		System.out.println("2. Search for riders by home city.");
+		System.out.println("3. Search for riders by name.");
+		System.out.println("4. Add a rider.");
+		System.out.println("5. List all drivers.");
+		System.out.println("6. Search for drivers by vehicle type.");
+		System.out.println("7. Add a driver.");
+		System.out.println("8. List all rides alphabetically by pickup location.");
+		System.out.println("9. Search for rides by pickup location.");
+		System.out.println("10. Search for rides by rider name.");
+		System.out.println("11. List the participants of a shared ride by pickup location.");
+		System.out.println("12. Add a ride.");
+		System.out.println("0. Exit the program.");
+	}
+	
+	private static <T> void printLinkedList(LinkedList<T> list) {
+		if(list == null || list.empty()) { 
+			System.out.println("No results found.");
+			return;
+		}
+		
+		list.findfirst();
+		while(true) {
+			System.out.println(list.retrieve());
+			if(!list.last())
+				list.findnext();
+			else
+				break;
+		}
+		
+		
+	}
+	
+	
+	public static void main(String[] args) {
+		IRideSharingSystem system = new RideSharingSystem();
+		
+		system.loadRidersFromCSV("/Users/kadiabdulhakim/Downloads/Phase 1/riders_100.csv");
+		system.loadDriversFromCSV("/Users/kadiabdulhakim/Downloads/Phase 1/drivers_30.csv");
+		system.loadRidesFromCSV("/Users/kadiabdulhakim/Downloads/Phase 1/rides_40.csv");
+		
+		Scanner scanner = new Scanner(System.in);
+		int choice = -1;
+		while (choice != 0) {
+			printMenu();
+			System.out.println("Enter choice: ");
+			if(scanner.hasNextInt()) {
+				
+				choice = scanner.nextInt();
+				scanner.nextLine();
+			}
+			
+			else {
+				scanner.nextLine();
+				continue;
+			}
+			
+			switch(choice) {
+			case 1:
+				printLinkedList(system.getAllRiders());
+				break;
+				
+			case 2:
+				System.out.print("Enter home city: ");
+				String city = scanner.nextLine().trim();
+				printLinkedList(system.searchRidersByHomeCity(city));
+				break;
+				
+			case 3:
+				System.out.print("Enter rider full name: ");
+				String name = scanner.nextLine().trim();
+				printLinkedList(system.searchRidersByName(name));
+				break;
+				
+			case 4:
+				System.out.print("Enter rider ID: ");
+				int rId = Integer.parseInt(scanner.nextLine().trim());
+				System.out.print("Enter full name: ");
+				String rname = scanner.nextLine().trim();
+				System.out.print("Enter phone number (10 digits): ");
+				String rPhone = scanner.nextLine().trim();
+				System.out.print("Enter emai: ");
+				String rEmail = scanner.nextLine().trim();
+				System.out.print("Enter home city: ");
+				String rCity = scanner.nextLine().trim();
+				
+				try {
+					Rider rider = new Rider(rId, rname, rPhone, rEmail, rCity);
+					if(system.addRider(rider)) {
+						System.out.println("Rider added successfully.");
+					}
+					else {
+						System.out.println("Failed to add rider. (duplicate ID or error)");
+					}
+				} catch (IllegalArgumentException e) {
+					System.out.println("Error: " + e.getMessage());
+				}
+				
+				break;
+				
+				
+			case 5:
+				printLinkedList(system.getAllDrivers());
+				break;
+				
+			case 6:
+				System.out.print("Enter vehicle type (SEDAN, LUXURY_SEDAN, SUV, VAN): ");
+				String vTypeString = scanner.nextLine().trim().toUpperCase();
+				try {
+					VehicleType vt = VehicleType.valueOf(vTypeString);
+					printLinkedList(system.searchDriversByVehicleType(vt));
+					}
+				catch (IllegalArgumentException e) {
+					System.out.println("Invalid vehicle type.");
+				}
+				break;
+				
+				
+			case 7:
+				System.out.print("Enter driver ID: ");
+				int dId = Integer.parseInt(scanner.nextLine().trim());
+				System.out.print("Enter full name: ");
+				String dname = scanner.nextLine().trim();
+				System.out.print("Enter phone number (10 digits): ");
+				String dPhone = scanner.nextLine().trim();
+				System.out.print("Enter vehicle plate (e.g. ABC1234): ");
+				String dPlate = scanner.nextLine().trim();
+				System.out.print("Enter vehicle type (SEDAN, LUXURY_SEDAN, SUV, VAN): ");
+				String dType = scanner.nextLine().trim().toUpperCase();
+				
+				
+				try {
+					VehicleType vt = VehicleType.valueOf(dType);
+					Driver driver = new Driver(dId, dname, dPhone, dPlate, vt);
+					if(system.addDriver(driver)) {
+						System.out.println("Driver added successfully.");
+					}
+					else {
+						System.out.println("Failed to add driver. (duplicate ID, plate, or error)");
+					}
+				} catch (IllegalArgumentException e) {
+					System.out.println("Error: " + e.getMessage());
+				}
+				break;
+				
+				
+			case 8:
+				printLinkedList(system.getAllRidesAlphabetically());
+				break;
+				
+			case 9:
+				System.out.println("Enter pickup location: ");
+				String pLoc = scanner.nextLine().trim();
+				printLinkedList(system.searchRidesByPickupLocation(pLoc));
+				break;
+				
+			case 10:
+				System.out.println("Enter rider name: ");
+				String rNameSearch = scanner.nextLine().trim();
+				printLinkedList(system.searchRidersByName(rNameSearch));
+				break;
+				
+			case 11:
+				System.out.println("Enter pickup location: ");
+				String sharedLoc = scanner.nextLine().trim();
+				printLinkedList(system.getSharedRideParticipants(sharedLoc));
+				break;
+				
+			case 12:
+				System.out.print("Is this ride PRIVATE or SHARED? (P/S): ");
+				String rideType = scanner.nextLine().trim().toUpperCase();
+				System.out.print("Enter pickup location: ");
+				String pLocation = scanner.nextLine().trim();
+				System.out.print("Enter pickup time (MM/DD/YYYY): ");
+				DateTime pTime = DateTime.parse(scanner.nextLine().trim());
+				System.out.print("Enter dropoff time (MM/DD/YYYY): ");
+				DateTime dTime = DateTime.parse(scanner.nextLine().trim());
+				System.out.print("Enter dropoff location: ");
+				String dLocation = scanner.nextLine().trim();
+				System.out.print("Enter driver ID: ");
+				int driverId = Integer.parseInt(scanner.nextLine().trim());
+				
+				if(rideType.startsWith("P")) {
+					System.out.print("Enter rider ID: ");
+					int riderId = Integer.parseInt(scanner.nextLine().trim());
+					if(system.schedulePrivateRide(pLocation, pTime, dTime, dLocation, riderId, driverId)) {
+						System.out.print("Private ride scheduled successfully!");
+					}
+					else {
+						System.out.print("Failed to schedule a private ride (conflict or invalid user).");
+					}
+				} else if(rideType.startsWith("S")) {
+					System.out.print("Enter rider IDs seperated by semicolons (e.g. 1;25;36): ");
+					String[] rStr = scanner.nextLine().trim().split(";");
+					int[] riderIds = new int[rStr.length];
+					for(int i = 0; i < rStr.length; i++) {
+						riderIds[i] = Integer.parseInt(rStr[i].trim());
+					}
+					if(system.scheduleSharedRide(pLocation, pTime, dTime, dLocation, riderIds, driverId)) {
+						System.out.print("Shared ride scheduled successfully!");
+					}
+					else {
+						System.out.print("Failed to schedule a shared ride (conflict or invalid user).");
+					}
+				}
+				else {
+					System.out.print("Invalid ride type.");
+				}
+				break;
+				
+				
+			case 0:
+				System.out.println("Exiting Ride-Sharing System. Goodbye!");
+				break;
+				
+				
+			default:
+				System.out.println("Invalid choice. please try again.");
+
+			
+			}
+		}
+	}
+	
+}
