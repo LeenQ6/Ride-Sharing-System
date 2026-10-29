@@ -20,7 +20,7 @@ public class PrivateRide extends Ride implements IPrivateRide{
    }
 
    public String toString(){
-      return "PrivateRide[" +super.toString()+", Rider: "+(rider !=null? rider.getName() :"None") +")";
+      return "PrivateRide[" +super.toString()+", Rider: "+(rider !=null? rider.getName() :"None") +"]";
    }
 
 
