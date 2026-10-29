@@ -29,7 +29,7 @@ public class SharedRide extends Ride implements ISharedRide{
       participants.findFirst();
    
       while(true){
-         if(participants.retrieve().getId==riderId){
+         if(participants.retrieve().getId()==riderId){
             participants.remove();
             return true;
          }//end if
