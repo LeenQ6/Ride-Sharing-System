@@ -36,5 +36,5 @@ public int compareTo(IDriver other){
 return this.id - other.getId();}
 
 public String toString(){
-return super.toString()+" ,vehicle Plate: " +vehiclePlate+" ,vehicle Type: " +vehicleType;}
+return super.toString()+", vehicle Plate: " +vehiclePlate+", vehicle Type: " +vehicleType;}
 }
