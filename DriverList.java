@@ -168,17 +168,20 @@ return false ;
 public int removeByName(String fullName){
 if ( fullName == null || drivers.empty())
 return 0 ; 
-
+  
 int count = 0 ; 
-int length = drivers.size() ; 
-
+ 
 drivers.findfirst() ; 
-for(int i = 1 ; i <= length ; i ++ ){
+while (true){
 IDriver currentDriver = drivers.retrieve() ;
-if (currentDriver.getName().equals(fullName) ){
+if(currentDriver.getName().equals(fullName)){
 drivers.remove() ; 
-count++ ; }
-
+count++ ;
+if ( drivers.empty())
+break;
+}
+else if(drivers.last())
+break ; 
 else
 drivers.findnext() ; 
 }
