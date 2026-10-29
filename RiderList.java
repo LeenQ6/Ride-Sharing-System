@@ -173,7 +173,7 @@ int count = 0 ;
 riders.findfirst() ; 
 while (true){
 IRider currentRider = riders.retrieve() ;
-if(currentRider.geName().equals(fullName)){
+if(currentRider.getName().equals(fullName)){
 riders.remove() ; 
 count++ ;
 if ( riders.empty())
