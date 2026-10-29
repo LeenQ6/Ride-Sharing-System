@@ -191,23 +191,25 @@ return count ;
 public int removeByVehicleType(VehicleType vehicleType){
 if ( vehicleType == null || drivers.empty())
 return 0 ; 
-
 int count = 0 ; 
-int length = drivers.size() ; 
-
+ 
 drivers.findfirst() ; 
-for(int i = 1 ; i <= length ; i ++ ){
+while(true){
 IDriver currentDriver = drivers.retrieve() ;
 if (currentDriver.getVehicleType() == vehicleType ){
 drivers.remove() ; 
-count++ ; }
+count++ ; 
+if(drivers.empty())
+break ; 
+}
 
+else if(drivers.last())
+break ; 
 else
-drivers.findnext() ;
+drivers.findnext() ; 
 }
 return count ; 
 }
-
 
 
 
