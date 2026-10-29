@@ -12,7 +12,7 @@ return;
 if(day<1 || day>31)
 return;
 
-if(hour<0 || hour<23)
+if(hour<0 || hour>23)
 return;
 
 if(minute<0 || minute>59)
@@ -43,32 +43,32 @@ int minute=Integer.parseInt(timeParts[1].trim());
 return new DateTime(year, month, day, hour, minute);
 }
 
-@Override
+
 public int getYear(){
 return year;
 }
 
-@Override
+
 public int getMonth(){
 return month;
 }
 
-@Override
+
 public int getDay(){
 return day;
 }
 
-@Override
+
 public int getHour(){
 return hour;
 }
 
-@Override
+
 public int getMinute(){
 return minute;
 }
 
-@Override
+
 public int compareTo(IDateTime other){
 
 if(this.year != other.getYear())
@@ -86,14 +86,14 @@ return this.hour-other.getHour();
 return this.minute-other.getMinute();
 }
 
-@Override
+
 public String format(){
 
-return String.format("%02d/%02d/04d %02d:%02d",month, day, year, hour, minute);
+return String.format("%02d/%02d/%04d %02d:%02d",month, day, year, hour, minute);
 
 }
 
-@Override 
+
 public String toString(){
 return format();
 }
