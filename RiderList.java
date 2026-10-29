@@ -167,18 +167,20 @@ return false ;
 public int removeByName(String fullName){
 if ( fullName == null || riders.empty())
 return 0 ; 
-
+  
 int count = 0 ; 
-int length = riders.size() ; 
-
+ 
 riders.findfirst() ; 
-for(int i = 1 ; i <= length ; i ++ ){
+while (true){
 IRider currentRider = riders.retrieve() ;
-if (currentRider.getName().equals(fullName) ){
+if(currentRider.geName().equals(fullName)){
 riders.remove() ; 
-count++ ; }
-
-
+count++ ;
+if ( riders.empty())
+break;
+}
+else if(riders.last())
+break ; 
 else
 riders.findnext() ; 
 }
@@ -190,25 +192,24 @@ if ( homeCity == null || riders.empty())
 return 0 ; 
 
 int count = 0 ; 
-int length = riders.size() ; 
-
+ 
 riders.findfirst() ; 
-for(int i = 1 ; i <= length ; i ++ ){
+while(true){
 IRider currentRider = riders.retrieve() ;
-if (currentRider.getName().equalsIgnoreCase(homeCity) ){
+if (currentRider.getHomeCity().equalsIgnoreCase(homeCity) ){
 riders.remove() ; 
-count++ ; }
+count++ ; 
+if(riders.empty())
+break ; 
+}
 
 else if(riders.last())
-riders.findnext() ; 
-
-else
 break ; 
+else
+riders.findnext() ; 
 }
 return count ; 
 }
-
-
 
 
 }
