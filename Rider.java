@@ -24,5 +24,5 @@ public int compareTo(IRider other){
 return this.id - other.getId();}
 
 public String toString(){
-return super.toString()+" ,email: " +email+" ,home city: " +homeCity;}
+return super.toString()+", email: " +email+", home city: " +homeCity;}
 }
