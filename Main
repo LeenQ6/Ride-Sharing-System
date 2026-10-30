@@ -165,7 +165,7 @@ public class Main {
 			case 10:
 				System.out.println("Enter rider name: ");
 				String rNameSearch = scanner.nextLine().trim();
-				printLinkedList(system.searchRidersByName(rNameSearch));
+				printLinkedList(system.searchRidesByRiderName(rNameSearch));
 				break;
 				
 			case 11:
