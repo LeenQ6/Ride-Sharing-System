@@ -1,3 +1,5 @@
+package project212;
+
 public class LinkedList<T>{
 private Node<T> head ; 
 private Node<T> current ; 
@@ -45,27 +47,27 @@ current = newNode ;
 else{
 newNode.next = current.next ; 
 current.next = newNode ;
+
 current = newNode ; 
 }
 size++ ; 
 }
 
 public void remove(){
-if (current == head){
-head = head.next ; 
-}
-else{
-Node<T> temp = head ; 
-while (temp.next!= current)
-temp = temp.next ; 
-temp.next = current.next ; 
-}
-if (current.next!=null)
-current = current.next  ; 
-else
-current = head ; 
-
-size -- ;
+    if (current == head){
+        head = head.next ;
+    }
+    else{
+        Node<T> temp = head ;
+        while (temp.next != current)
+            temp = temp.next ;
+        temp.next = current.next ;
+    }
+    if (current.next != null)
+        current = current.next ;
+    else
+        current = head ;
+    size-- ;
 }
 
 public int size(){
@@ -79,31 +81,30 @@ return ;
 Node<T> temp = head ; 
 
 while ( temp!= null){
-System.out.println(temp.data+" ") ; 
+System.out.println(temp.data) ; 
 temp = temp.next ; 
 }
 
-System.out.println("Number of items: "+size) ;
+System.out.println(size) ;
 }
 
-public void insertBeforeCurrent(T d){
-Node<T> newNode = new Node<T> (d) ;
-if (head == null)
-head = current = newNode ; 
-else if( current == head){
-newNode.next = head ; 
-head = newNode ; 
+public void insertBeforeCurrent(T val){
+    Node<T> newNode = new Node<T> (val) ;
+    if (size == 0)
+        head = current = newNode ;
+    else if (current == head){
+        newNode.next = head ;
+        head = newNode ;
+    }
+    else{
+        Node<T> temp = head ;
+        while (temp.next != current)
+            temp = temp.next ;
+        newNode.next = current ;
+        temp.next = newNode ;
+    }
+    current = newNode ;
+    size++ ;
 }
-else{
-Node<T> temp = head ; 
-while ( temp.next!= current)
-temp = temp.next ;
-
-newNode.next = current ; 
-temp.next = newNode ; 
-}
-size++ ; 
-}
-
 
 }
