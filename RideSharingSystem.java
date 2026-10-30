@@ -18,12 +18,14 @@ public RideSharingSystem() {
  @override
 public boolean addRider(IRider r) {
 	 IRider r1 = null;
+
 	 try { 
 		r1 = new Rider(r.getId(), r.getName(), r.getPhoneNumber(), r.getEmail(), r.getHomeCity());
 	 }
 	 catch (IllegalArgumentException e)
 	 {
-		 return false;
+	     System.out.println("Rejected rider: " + e.getMessage());
+	     return false;
 	 }
     return riderList.add(r1);
   }
@@ -32,8 +34,10 @@ public boolean addRider(IRider r) {
 public boolean loadRidersFromCSV(String filePath) {
     try{ 
       Scanner read = new Scanner(new File(filePath));
+         
       while (read.hasNextLine()) {
         String [] d = read.nextLine().trim().split(",");
+     
         IRider r = new Rider(
           Integer.parseInt(d[0]), //riderId
           d[1], //name
@@ -52,7 +56,8 @@ public boolean loadRidersFromCSV(String filePath) {
  
       }
     catch (Exception e) {
-      return false;
+        e.printStackTrace();
+        return false;
     }
 
   
@@ -241,7 +246,7 @@ public boolean loadRidesFromCSV (String filePath) {
   try {
        Scanner read = new Scanner (new File (filePath));
         while (read.hasNextLine()){ 
-        	String[] d = read.nextLine().trim().split(", ");
+        	String[] d = read.nextLine().trim().split(",");
         	
         	String rideType = d[0];
         	String pickupLocation = d[1];
@@ -265,7 +270,7 @@ public boolean loadRidesFromCSV (String filePath) {
         				driverId
         				);
         		} else if (rideType.equalsIgnoreCase("SHARED")) {
-	String[] riderStrings = d[6].split (".");
+	String[] riderStrings = d[6].split (";");
 	int[] riderIds = new int[riderStrings.length];
 	
 	for  (int i = 0; i < riderStrings.length; i++) {
@@ -286,8 +291,9 @@ public boolean loadRidesFromCSV (String filePath) {
         read.close();
         return true;
   } catch (Exception e) {
-	  return false;
-  }
+	    e.printStackTrace();
+	    return false;
+	}
   }
 
 @override
@@ -461,4 +467,3 @@ public boolean removeDriver(int driverId) {
       
   
   
-
