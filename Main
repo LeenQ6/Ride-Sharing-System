@@ -1,4 +1,4 @@
-
+package project212;
 
 import java.util.Scanner;
 
@@ -179,9 +179,9 @@ public class Main {
 				String rideType = scanner.nextLine().trim().toUpperCase();
 				System.out.print("Enter pickup location: ");
 				String pLocation = scanner.nextLine().trim();
-				System.out.print("Enter pickup time (MM/DD/YYYY): ");
+				System.out.print("Enter pickup time (MM/DD/YYYY HH:mm): ");
 				DateTime pTime = DateTime.parse(scanner.nextLine().trim());
-				System.out.print("Enter dropoff time (MM/DD/YYYY): ");
+				System.out.print("Enter dropoff time (MM/DD/YYYY HH:mm): ");
 				DateTime dTime = DateTime.parse(scanner.nextLine().trim());
 				System.out.print("Enter dropoff location: ");
 				String dLocation = scanner.nextLine().trim();
