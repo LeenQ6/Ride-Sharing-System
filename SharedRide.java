@@ -26,7 +26,7 @@ public class SharedRide extends Ride implements ISharedRide{
       if(participants.empty())
          return false;
    
-      participants.findFirst();
+      participants.findfirst();
    
       while(true){
          if(participants.retrieve().getId()==riderId){
@@ -34,7 +34,7 @@ public class SharedRide extends Ride implements ISharedRide{
             return true;
          }//end if
          if(!participants.last())
-            participants.findNext();
+            participants.findnext();
          else
             return false;
       }//end while
@@ -51,7 +51,7 @@ public class SharedRide extends Ride implements ISharedRide{
       if(participants.empty())
          return false;
    
-      participants.findFirst();
+      participants.findfirst();
    
       while(true){
       
@@ -59,7 +59,7 @@ public class SharedRide extends Ride implements ISharedRide{
             return true;
       
          if(!participants.last())
-            participants.findNext();
+            participants.findnext();
          else
             return false;
       }//end while
@@ -79,13 +79,13 @@ public class SharedRide extends Ride implements ISharedRide{
          System.out.println("No rides found.");
          return;
       }//end if
-      participants.findFirst();
+      participants.findfirst();
       while(true){
          System.out.println(participants.retrieve());
          if(participants.last()){
             break;
          }//end if loop
-         participants.findNext();
+         participants.findnext();
       }//end while
    
    
