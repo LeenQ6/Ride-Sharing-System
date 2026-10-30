@@ -12,7 +12,7 @@ package project212;
 		public String getVehiclePlate(){
 		return vehiclePlate;}
 
-		public void setVehiclePlate(String vehiclePlate){//
+		public void setVehiclePlate(String vehiclePlate){
 		if (vehiclePlate == null || vehiclePlate.length() != 7)
 		throw new IllegalArgumentException("The Vehicle Plate Must Consist of 3 Uppercase Letters Followed by 4 Digits");
 
