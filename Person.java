@@ -1,3 +1,5 @@
+package project212;
+
 public abstract class Person implements IPerson {
 
 protected final int id ; 
@@ -30,14 +32,13 @@ throw new IllegalArgumentException("The Phone Number Must Consist of 10 Digits")
 for(int i=0 ; i<phoneNumber.length() ;i++)
 if(!Character.isDigit(phoneNumber.charAt(i)))
 throw new IllegalArgumentException("The Phone Number Must Contain Digits Only") ; 
-
-this.phoneNumber = phoneNumber ; 
+this.phoneNumber = phoneNumber;
 }
 
 public LinkedList<IRide> getRideHistory(){
 return rideHistory;}
 
 public String toString(){
-return "id: "+id+", name: "+name+", phone number: " +phoneNumber;}
+return "id: "+id+",name: "+name+" ,phone number: " +phoneNumber;}
 
 }
